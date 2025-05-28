@@ -50,11 +50,10 @@ pipeline {
                         sh '''
                         cd deploy
                         cat deploy.yaml
-                        sed -i "s/12/${BUILD_NUMBER}/g" deploy.yaml
+                        sed -i "s|dockaleem/todo-app:v[0-9]*|dockaleem/todo-app:v${BUILD_NUMBER}|g" deploy.yaml
                         cat deploy.yaml
                         git add deploy.yaml
-                        git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
-                        git remote -v
+                        git diff --quiet || git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git push https://github.com/ammukaleem/cicd-end-to-end HEAD:main
                         '''                        
                  }
