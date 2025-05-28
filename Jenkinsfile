@@ -4,6 +4,7 @@ pipeline {
     
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
+        
     }
     
     stages {
@@ -32,11 +33,14 @@ pipeline {
                 script{
                     sh '''
                     echo 'Push to Repo'
-                    docker push dockaleem/cicd-e2e:${BUILD_NUMBER}
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]){ 
+                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    docker push dockaleem/cicd-e2e:6
                     '''
+                     }
+                   }
                 }
-            }
-        }
+                 
         
         stage('Checkout K8S manifest SCM'){
             steps {
