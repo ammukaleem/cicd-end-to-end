@@ -31,15 +31,17 @@ pipeline {
         stage('Push the artifacts'){
            steps{
                 script{
+                    
+                    withCredentials([usernamePassword(credentialsId: 'doc-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
-                    echo 'Push to Repo'
-                    withCredentials([usernamePassword(credentialsId: 'doc-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]){ 
-                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    echo "Push to Repo"
+                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                     docker push dockaleem/cicd-e2e:6
                     '''
-                     }
+                       }
                    }
-                }
+               }
+          } 
                  
         
         stage('Checkout K8S manifest SCM'){
