@@ -46,8 +46,7 @@ pipeline {
                     
         stage('Update K8S manifest & push to Repo'){
             steps {
-                script{
-                    withCredentials([usernamePassword(passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                script{                    
                         sh '''
                         cd deploy
                         cat deploy.yaml
@@ -58,8 +57,7 @@ pipeline {
                         git remote -v
                         git push https://github.com/ammukaleem/cicd-end-to-end HEAD:main
                         '''                        
-                    }
-                }
+                 }
             }
         }
     }
