@@ -50,6 +50,8 @@ pipeline {
                         sh '''
                         cd deploy
                         cat deploy.yaml
+                        git config --global user.name "ammukaleem"
+                        git config --global user.email "madkaleem777@gmail.com"
                         sed -i "s|dockaleem/todo-app:v[0-9]*|dockaleem/todo-app:v${BUILD_NUMBER}|g" deploy.yaml
                         cat deploy.yaml
                         git add deploy.yaml
