@@ -10,8 +10,8 @@ pipeline {
         
         stage('Checkout'){
            steps {
-                url: 'https://github.com/ammukaleem/cicd-end-to-end',
-                branch: 'main'
+                url: 'https://github.com/ammukaleem/cicd-end-to-end', branch: 'main'
+                
            }
         }
 
