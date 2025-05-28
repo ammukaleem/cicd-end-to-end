@@ -33,7 +33,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Push to Repo'
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]){ 
+                    withCredentials([usernamePassword(credentialsId: 'doc-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]){ 
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
                     docker push dockaleem/cicd-e2e:6
                     '''
