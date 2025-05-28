@@ -43,13 +43,7 @@ pipeline {
                }
           } 
                  
-        
-        stage('Checkout K8S manifest SCM'){
-            steps {
-                git url: 'https://github.com/ammukaleem/cicd-end-to-end', branch: 'main'
-            }
-        }
-        
+                    
         stage('Update K8S manifest & push to Repo'){
             steps {
                 script{
