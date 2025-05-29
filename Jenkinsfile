@@ -53,7 +53,7 @@ pipeline {
                    cd deploy
                    sed -i "s|IMAGE_TAG|${BUILD_NUMBER}|g" deploy.yaml
                    git add deploy.yaml
-                   git diff --quiet || git commit -m "Update deploy.yaml with image tag ${imageTag}"
+                   git diff --quiet || git commit -m "Update deploy.yaml with image tag ${IMAGE_TAG}"
                    git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/ammukaleem/cicd-end-to-end.git HEAD:main
                    """
                   }
