@@ -55,7 +55,7 @@ pipeline {
                    git diff --quiet || git commit -m "Update deploy.yaml"
                    export IMAGE_TAG=latest
                    echo 'image: dockaleem/todo-app:${IMAGE_TAG}' > deploy.yaml
-                   sed -i "s|\\\${IMAGE_TAG}|${IMAGE_TAG}|g" deploy.yaml
+                   sed -i "s|\\\${latest}|${IMAGE_TAG}|g" deploy.yaml
                    git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/ammukaleem/cicd-end-to-end.git HEAD:main
                    """
                   }
