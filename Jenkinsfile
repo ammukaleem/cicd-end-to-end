@@ -36,7 +36,7 @@ pipeline {
                     sh '''
                     echo "Push to Repo"
                     echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                    docker push dockaleem/cicd-e2e:${IMAGE_TAG}
+                    docker push dockaleem/todo-app:${IMAGE_TAG}
                     '''
                        }
                    }
