@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
       - name: todo
-        image: dockaleem/todo-app:latest
-        imagePullPolicy: Always
+        image: dockaleem/todo-app:ImageTag
         ports:
         - containerPort: 8000
