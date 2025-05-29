@@ -46,19 +46,18 @@ pipeline {
                     
         stage('Update K8S manifest & push to Repo'){
             steps {
-                    withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {               
-                        sh '''
-                        cd deploy
-                        cat deploy.yaml
-                        git config --global user.name "ammukaleem"
-                        git config --global user.email "madkaleem777@gmail.com"
-                        sed -i "s|dockaleem/todo-app:v[0-9]*|dockaleem/todo-app:v${BUILD_NUMBER}|g" deploy.yaml
-                        cat deploy.yaml
-                        git add deploy.yaml
-                        git diff --quiet || git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
-                        git push https://github.com/ammukaleem/cicd-end-to-end HEAD:main
-                        '''                        
-                    }
+                   withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                   sh """
+                   git config --global user.email "you@example.com"
+                   git config --global user.name "Your Name"
+
+                   git add deploy.yaml
+                   git diff --quiet || git commit -m "Update deploy.yaml"
+
+                   git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/ammukaleem/cicd-end-to-end.git HEAD:main
+                   """
+                  }
+
             }
         }
     }
