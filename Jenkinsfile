@@ -22,7 +22,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Buid Docker Image'
-                    docker build -t dockaleem/cicd-e2e:${IMAGE_TAG} .
+                    docker build -t dockaleem/todo-app:${IMAGE_TAG} .
                     '''
                 }
             }
