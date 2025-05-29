@@ -50,7 +50,7 @@ pipeline {
                    sh """
                    git config --global user.email "mdkaleem777@gmail.com"
                    git config --global user.name "ammukaleem"
-
+                   cd deploy
                    git add deploy.yaml
                    git diff --quiet || git commit -m "Update deploy.yaml"
 
