@@ -46,7 +46,7 @@ pipeline {
                     
         stage('Update K8S manifest & push to Repo'){
             steps {
-                script{                    
+                    withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {               
                         sh '''
                         cd deploy
                         cat deploy.yaml
@@ -58,7 +58,7 @@ pipeline {
                         git diff --quiet || git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git push https://github.com/ammukaleem/cicd-end-to-end HEAD:main
                         '''                        
-                 }
+                    }
             }
         }
     }
