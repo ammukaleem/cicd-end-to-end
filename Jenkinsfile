@@ -48,8 +48,8 @@ pipeline {
             steps {
                    withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                    sh """
-                   git config --global user.email "you@example.com"
-                   git config --global user.name "Your Name"
+                   git config --global user.email "mdkaleem777@gmail.com"
+                   git config --global user.name "ammukaleem"
 
                    git add deploy.yaml
                    git diff --quiet || git commit -m "Update deploy.yaml"
