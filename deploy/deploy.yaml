@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: todo
-        image: dockaleem/todo-app:${BUILD_NUMBER}
+        image: dockaleem/todo-app:__IMAGE_TAG__
         ports:
         - containerPort: 8000
