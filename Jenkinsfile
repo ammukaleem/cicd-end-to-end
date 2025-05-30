@@ -48,11 +48,14 @@ pipeline {
             steps {
                    withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                    sh """
-                   git config --global user.email "mdkaleem777@gmail.com"
-                   git config --global user.name "ammukaleem"
                    cd deploy
-                   
+                   echo '[INFO] Before sed - current image line:'
+                   grep 'image:' deploy.yaml
                    sed -i 's|__IMAGE_TAG__|${IMAGE_TAG}|g' deploy.yaml
+                   echo '[INFO] After sed - current image line:'
+                   grep 'image:' deploy.yaml
+                   git config user.name "ammukaleem"
+                   git config user.email "mdkaleem777@gmail.com"
                    git add deploy.yaml
                    git diff --quiet || git commit -m "Update deploy.yaml with image tag ${IMAGE_TAG}"
                    git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/ammukaleem/cicd-end-to-end.git HEAD:main
