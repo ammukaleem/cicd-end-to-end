@@ -54,7 +54,7 @@ pipeline {
                    git config user.name "ammukaleem"
                    git config user.email "mdkaleem777@gmail.com"
                    git add deploy.yaml
-                   git diff --quiet || git commit -m "Update deploy.yaml with image tag ${IMAGE_TAG}"
+                   git diff --quiet || git commit -m "Update deploy.yaml with image tag ${replaceImageTag}"
                    git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/ammukaleem/cicd-end-to-end.git HEAD:main
                    """
                   }
