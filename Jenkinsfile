@@ -49,11 +49,8 @@ pipeline {
                    withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                    sh """
                    cd deploy
-                   echo '[INFO] Before sed - current image line:'
-                   grep 'image:' deploy.yaml
-                   sed -i 's|__IMAGE_TAG__|${IMAGE_TAG}|g' deploy.yaml
-                   echo '[INFO] After sed - current image line:'
-                   grep 'image:' deploy.yaml
+                   BUILD_NUMBER=${BUILD_NUMBER}
+                   sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deploy.yaml
                    git config user.name "ammukaleem"
                    git config user.email "mdkaleem777@gmail.com"
                    git add deploy.yaml
